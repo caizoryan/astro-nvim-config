@@ -1,0 +1,50 @@
+{
+  "Simple createSignal": {
+    "prefix": "sig",
+    "body": [
+      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = createSignal(${2});"
+    ],
+    "description": "Simple createSignal"
+  },
+  "Simple createEffect": {
+    "prefix": "eff",
+    "body": [
+      "createEffect(() => {",
+      "  const value = ${1:source}();",
+      "  $0",
+      "});"
+    ],
+    "description": "Simple createEffect"
+  },
+  "Solid empty function component": {
+    "prefix": "comp",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE}}: Component<{$2}> = (props) => {",
+      "  $0",
+      "  return <div></div>;",
+      "};"
+    ],
+    "description": "Solid empty function component"
+  },
+  "createEffect with explicit sources": {
+    "prefix": "seffon",
+    "body": [
+      "createEffect(on(${1: source}, (value, prev) => {",
+      "  $0",
+      "}));"
+    ],
+    "description": "createEffect with explicit sources"
+  },
+  "Simple createMemo": {
+    "prefix": "smemo",
+    "body": ["const ${1:value} = createMemo(() => $0);"],
+    "description": "Simple createMemo"
+  },
+  "createMemo with explicit sources": {
+    "prefix": "smemoon",
+    "body": [
+      "const ${1:value} = createMemo(on(${2:value}, (value, prev) => $0));"
+    ],
+    "description": "createMemo with explicit sources"
+  }
+}
