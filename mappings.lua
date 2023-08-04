@@ -13,6 +13,7 @@ return {
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
     ["<leader>lz"] = { "<cmd>ZenMode<cr>" },
+    ["<leader>fs"] = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>" },
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
   },
