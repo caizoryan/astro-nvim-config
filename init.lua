@@ -30,6 +30,7 @@ return {
     setup_handlers = {
       -- add custom handler
       rust_analyzer = function(_, opts) require("rust-tools").setup { server = opts } end,
+      elm_language_server = function(_, opts) require("lspconfig").elm_ls.setup(opts) end,
     },
     -- customize lsp formatting options
     formatting = {
@@ -73,17 +74,13 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
-    -- Set up custom filetypes
-    -- vim.filetype.add {
-    --   extension = {
-    --     foo = "fooscript",
-    --   },
-    --   filename = {
-    --     ["Foofile"] = "fooscript",
-    --   },
-    --   pattern = {
-    --     ["~/%.config/foo/.*"] = "fooscript",
-    --   },
-    -- }
+    -- create an augroup to easily manage autocommands
+    vim.api.nvim_create_augroup("monkey", { clear = true })
+    -- create a new autocmd on the "User" event
+    vim.api.nvim_create_autocmd("BufWritePost", {
+      group = "monkey", -- add the autocmd to the newly created augroup
+      pattern = "index.ts", -- run the autocmd on all files
+      command = "silent !bun build ./index.ts --outfile=script.js", -- the command to run
+    })
   end,
 }
